@@ -1,0 +1,431 @@
+-------------------------------------------------------------------------------
+                  Automated Tropical Cyclone Forecast (ATCF) 
+                         "Data Files / Text Files"
+------------------------------------------------------------------------------- 
+                     Last update: 3 July 2017
+
+See "NOTICE" file for special notes about the database.
+
+
+-------------------------------------------------------------------------------
+ NOTICE STATEMENT:
+-------------------------------------------------------------------------------
+
+   This README describes the sub-directory structure and file layout / format
+   for ATCF realtime database files.  These files contain forecast guidance,
+   along with position and intensity estimates of Tropical and Subtropical 
+   Cyclones.  The data are provided "as-is" in a realtime automated fashion; 
+   consequently, the users of the data are REQUIRED to perform quality control 
+   of the data prior to use since there is a potential for errors within the 
+   files.  
+
+   Users are also cautioned that the data in these files are subject to
+   frequent revisions and can differ from information issued in official NHC 
+   products. 
+   
+   OFFICAL Tropical Cyclone forecast information is available from the 
+   following messages with WMO headers: 
+   
+   NORTH ATLANTIC BASIN: WTNT2{1-5} KNHC
+   
+   EASTERN NORTH PACIFIC BASIN: WTPZ2{1-5} KNHC 
+  
+   CENTRAL NORTH PACIFIC BASIN: WTPA2{1-5} PHFO 
+   
+
+ DOCUMENTATION ON TROPICAL CYCLONE WEATHER SERVICES:
+-------------------------------------------------------------------------------
+
+National Hurricane Operations Plan (NHOP) for 2017:
+URL --> http://www.ofcm.gov/publications/nhop/FCM-P12-2017.pdf
+
+The NHOP includes defintions of Storm IDs, basin identifers, etc., and 
+contains documenation on hurricane operations. 
+
+NWS Directives on Tropical Cyclone Weather Services (see NDS 10-6):
+URL -->  http://www.weather.gov/directives/010/010.htm
+
+Information on Model / Tracker performance:
+URL -->  http://www.nhc.noaa.gov/verification/index.shtml
+
+Information on ATCF data formats:
+URL -->  http://www.nrlmry.navy.mil/atcf_web/docs/database/new/database.html
+
+National Hurricane Center Home Page:
+URL --> http://www.hurricanes.gov
+
+Central Pacific Hurricane Center Home Page:
+URL --> http://www.prh.noaa.gov/cphc/
+
+
+-------------------------------------------------------------------------------   
+ SUB-DIRECTORY STRUCTURE:
+-------------------------------------------------------------------------------
+
+(-- *** SHIPS Intensity Model sub-directory *** ---)
+
+--> stext     
+               DESCRIPTION: diagnostic intermediate output generated from the
+               SHIPS model which includes predictor values and contributions.
+               Includes rapid intensification indicators from JHT projects.
+
+               CATEGORY:  forecast / model guidance.
+
+               SPECIAL NOTES:  None 
+
+               FILE CONVENTION: <YY><MM><DD><CC><basin><storm-number><XX>_ships.txt 
+
+	       <YY> = "2-digit Year"
+	       <MM> = "2-digit Month 01-12"
+	       <DD> = "2-digit Day of Month"
+	       <CC> = "synoptic or run cycle 00, 06, 12, or 18"
+
+	       <basin> = AL "for Atlantic basin"
+	               = EP "for East Pacific basin"
+		       = CP "for Central Pacific basin"
+
+               <storm-number> = 01 - 30   "numbered storms with forecasts
+                                          issued and numbers are *not* recycled
+                                          until the next season."
+                                90 - 99   "Invest, areas of interest watched
+                                           by forecasters for possible
+                                           development and these numbers are
+                                           re-used periodically throughout the
+                                           season"
+                                80 - 89   "Internal training storm numbers
+                                           which are to always be ignored"
+
+	       <XX> = "2-digit Year corresponding to the storm-number's respective season"
+
+               FILE FORMAT DOCUMENTATION:  described in the text file
+
+--> lsdiag
+               DESCRIPTION: input data file for the SHIPS regression model.
+               This data file does not provide any intesity onformation, it is an
+               input file only.
+
+
+               CATEGORY:  model input file
+
+               SPECIAL NOTES:  None 
+
+               FILE CONVENTION: <YY><MM><DD><CC><basin><storm-number><XX>_lsdiag.dat 
+
+	       <YY> = "2-digit Year"
+	       <MM> = "2-digit Month 01-12"
+	       <DD> = "2-digit Day of Month"
+	       <CC> = "synoptic or run cycle 00, 06, 12, or 18"
+
+	       <basin> = AL "for Atlantic basin"
+	               = EP "for East Pacific basin"
+		       = CP "for Central Pacific basin"
+
+               <storm-number> = 01 - 30   "numbered storms with forecasts
+                                          issued and numbers are *not* recycled
+                                          until the next season."
+                                90 - 99   "Invest, areas of interest watched
+                                           by forecasters for possible
+                                           development and these numbers are
+                                           re-used periodically throughout the
+                                           season"
+                                80 - 89   "Internal training storm numbers
+                                           which are to always be ignored"
+
+	       <XX> = "2-digit Year corresponding to the storm-number's respective season"
+
+               FILE FORMAT DOCUMENTATION:  not applicable
+
+	       
+(-- *** A-deck sub-directory *** ---)
+
+--> aid         "ATCF guidance comma delimited files (aka A-decks)"
+ 
+--> aid_public  "ATCF guidance comma delimited files (aka A-decks)"
+                              ... Public Files ...  
+               
+	       DESCRIPTION:  Offical Track and Intensity forecasts in comma
+	       delimited format.  Also contains NWP guidance on Tropical 
+	       Cyclones (TC) in comma delimited format using TC trackers.
+
+               CATEGORY:  forecast / model guidance.
+	       
+	       SPECIAL NOTES:  Model Guidance and forecasts listed as 
+	       "Interpolated" are guidance from the previous synoptic time that
+	       have been moved onto the current synoptic time's position point.
+	       
+	       see "nhc_techlist.dat" for Guidance descriptors.
+	       
+	       FILE CONVENTION:  a<basin><storm-number><YYYY>.dat
+	       
+	       <basin> = al "for Atlantic basin"
+	               = ep "for East Pacific basin"
+		       = cp "for Central Pacific basin"
+	
+	       <storm-number> = 01 - 30   "numbered storms with forecasts
+	                                  issued and numbers are *not* recycled
+					  until the next season."
+			        90 - 99   "Invest, areas of interest watched
+				           by forecasters for possible
+                                           development and these numbers are
+					   re-used periodically throughout the
+					   season"
+				80 - 89   "Internal training storm numbers
+				           which are to always be ignored"
+					   
+	       <YYYY> = 2003  "4-digit Year"
+	       
+	       Example:  aal102002.dat   "Atlantic basin, Storm #10 of 2002"
+	                 aep902002.dat   "E. pacific basin, Invest #90
+			 acp882002.dat   "Central Pacific basin, Test system #88
+			                  which is to be ignored."
+					  
+					   
+               FILE FORMAT DOCUMENTATION:  see the URL below:
+
+
+http://www.nrlmry.navy.mil/atcf_web/docs/database/new/abdeck.txt
+
+
+(-- *** B-deck sub-directory *** ---)
+
+--> btk         "ATCF best-track comma delimited files (aka B-decks)"
+
+               SPECIAL NOTE - as of May 15, 2004, these files contain wind
+               radii information similar to the A-decks, mutiple lines for
+               the same date/time group are included in the file format
+               along with 34 KT, 50 KT and 64 KT wind radii.
+ 
+	       DESCRIPTION:  Offical synoptic hour positions and intensity
+	       and wind radii of Tropical Cyclones in comma delimited format.  
+               Indicates the best position known at synoptic time. 
+
+               CATEGORY:  position / intensity
+	       
+	       SPECIAL NOTES:  Best track data is verified post season, so 
+	       expect revisions after the season.
+	       
+	       FILE CONVENTION:  b<basin><storm-number><YYYY>.dat
+	       
+	       <basin> = al "for Atlantic basin"
+	               = ep "for East Pacific basin"
+		       = cp "for Central Pacific basin"
+	
+	       <storm-number> = 01 - 30   "numbered storms with forecasts
+	                                  issued and numbers are *not* recycled
+					  until the next season."
+			        90 - 99   "Invest, areas of interest watched
+				           by forecasters for possible
+                                           development and these numbers are
+					   re-used periodically throughout the
+					   season"
+				80 - 89   "Internal training storm numbers
+				           which are to always be ignored"
+					   
+	       <YYYY> = 2003  "4-digit Year"
+	       
+	       Example:  bal102002.dat   "Atlantic basin, Storm #10 of 2002"
+	                 bep902002.dat   "E. pacific basin, Invest #90
+			 bcp882002.dat   "Central Pacific basin, Test system #88
+			                  which is to be ignored."
+					  
+					   
+               FILE FORMAT DOCUMENTATION:  see the URL below:
+
+http://www.nrlmry.navy.mil/atcf_web/docs/database/new/abdeck.txt
+
+(-- *** COMPUTES sub-directory *** ---)
+
+--> com        "ATCF compute comma delimited files (aka computes)"
+               Note - this data also resides in the a-decks
+ 
+	       DESCRIPTION:  Contains the latest position fix and intensity
+	       of Tropical Cyclones in comma delimited format and includes
+	       previous -24 hour positions / intensities for use in model
+	       TC bogusing.  
+
+               CATEGORY:  current position / intensity to past 24 hours
+	       
+	       SPECIAL NOTES:  Files are overwritten each forecast period.  
+	       This information is also contained within the ATCF A-decks.
+	       
+	       FILE CONVENTION:  <basin><storm-number><YYYY>.com
+	       
+	       <basin> = al "for Atlantic basin"
+	               = ep "for East Pacific basin"
+		       = cp "for Central Pacific basin"
+	
+	       <storm-number> = 01 - 30   "numbered storms with forecasts
+	                                  issued and numbers are *not* recycled
+					  until the next season."
+			        90 - 99   "Invest, areas of interest watched
+				           by forecasters for possible
+                                           development and these numbers are
+					   re-used periodically throughout the
+					   season"
+				80 - 89   "Internal training storm numbers
+				           which are to always be ignored"
+					   
+	       <YYYY> = 2003  "4-digit Year"
+	       
+	       Example:  al102002.com   "Atlantic basin, Storm #10 of 2002"
+	                 ep902002.com   "E. pacific basin, Invest #90
+			 cp882002.com   "Central Pacific basin, Test system #88
+			                 which is to be ignored."
+					  
+					   
+               FILE FORMAT DOCUMENTATION:  see the URL below:
+               Note - this site is maintained by the US Navy, at times it may be unavailable.
+
+http://www.nrlmry.navy.mil/atcf_web/docs/database/new/abdeck.txt
+
+(-- *** F-deck / Fixes sub-directory *** ---)
+
+--> fix        "ATCF fix file comma delimited files (aka F-decks / Fixes)"
+ 
+	       DESCRIPTION:  Contains *estimates* of position and intensity
+	       of Tropical Cyclones in comma delimited format as given by
+	       satellite analysts (TAFB, SAB, etc.) using the the Dvorak 
+	       technique or as estimated by automated satellite platform
+	       instruments or other data sources.  
+
+               CATEGORY:  estimated current position and/or intensity
+	       
+	       **WARNING** NOTES:  These files can contain large errors and 
+	       are quality controlled visually by trained forecasters.  Current
+	       position / intensity estimates *should* be retrieved from the 
+	       Best track (B-deck) files.
+	       
+	       FILE CONVENTION:  f<basin><storm-number><YYYY>.dat
+	       
+	       <basin> = al "for Atlantic basin"
+	               = ep "for East Pacific basin"
+		       = cp "for Central Pacific basin"
+	
+	       <storm-number> = 01 - 30   "numbered storms with forecasts
+	                                  issued and numbers are *not* recycled
+					  until the next season."
+			        90 - 99   "Invest, areas of interest watched
+				           by forecasters for possible
+                                           development and these numbers are
+					   re-used periodically throughout the
+					   season"
+				80 - 89   "Internal training storm numbers
+				           which are to always be ignored"
+					   
+	       <YYYY> = 2003  "4-digit Year"
+	       
+	       Example:  fal102002.com   "Atlantic basin, Storm #10 of 2002"
+	                 fep902002.com   "E. pacific basin, Invest #90
+			 fcp882002.com   "Central Pacific basin, Test system #88
+			                  which is to be ignored."
+					  
+					   
+               FILE FORMAT DOCUMENTATION:  see the URL below:
+               Note - this site is maintained by the US Navy, at times it may be unavailable.
+  
+http://www.nrlmry.navy.mil/atcf_web/docs/database/new/newfdeck.txt
+
+  
+(-- *** forecast file sub-directory *** ---)
+
+--> afst       "ATCF forecast file comma delimited files (aka forecast file)"
+               Note - this data also resides in the a-decks
+ 
+	       DESCRIPTION:  Contains the latest Offical Forecast (OFCL).  
+
+               CATEGORY:  offical forecast
+	       
+	       SPECIAL NOTES:  Files are overwritten each forecast period.  
+	       This information is also contained within the ATCF A-decks.
+	       
+	       FILE CONVENTION:  <basin><storm-number><YYYY>.fst
+	       
+	       <basin> = al "for Atlantic basin"
+	               = ep "for East Pacific basin"
+		       = cp "for Central Pacific basin"
+	
+	       <storm-number> = 01 - 30   "numbered storms with forecasts
+	                                  issued and numbers are *not* recycled
+					  until the next season."
+			        90 - 99   "Invest, areas of interest watched
+				           by forecasters for possible
+                                           development and these numbers are
+					   re-used periodically throughout the
+					   season"
+				80 - 89   "Internal training storm numbers
+				           which are to always be ignored"
+					   
+	       <YYYY> = 2003  "4-digit Year"
+	       
+	       Example:  al102002.fst   "Atlantic basin, Storm #10 of 2002"
+	                 ep902002.fst   "E. pacific basin, Invest #90
+			 cp882002.fst   "Central Pacific basin, Test system #88
+			                 which is to be ignored."
+					  
+					   
+               FILE FORMAT DOCUMENTATION:  see the URL below:
+               Note - this site is maintained by the US Navy, at times it may be unavailable.
+
+http://www.nrlmry.navy.mil/atcf_web/docs/database/new/abdeck.txt
+
+
+--> gpce  "ATCF Probability/Error Data Files (aka E-decks)"
+                           
+               
+	       DESCRIPTION:  The e-deck is used to store a variety of probabilitistc data. This can include
+                             guidance used to provide a measure of confidence in the track consensus aids.
+	                     The bounds of the data depict the probability in which a verifying position
+			     falls within the radius provided in the data deck.  It should be noted that
+			     the along track / across track guidance (GPCE-AX) is considered experimental
+			     and must treated as such. Probabilistic intensity and genesis forecast data 
+                             can also be contained in the e-deck.
+
+               CATEGORY:  forecast / model guidance.
+	       
+	       SPECIAL NOTES:  
+	       
+	       FILE CONVENTION:  e<basin><storm-number><YYYY>.dat
+	       
+	       <basin> = al "for Atlantic basin"
+	               = ep "for East Pacific basin"
+		       = cp "for Central Pacific basin"
+	
+	       <storm-number> = 01 - 30   "numbered storms with forecasts
+	                                  issued and numbers are *not* recycled
+					  until the next season."
+			        90 - 99   "Invest, areas of interest watched
+				           by forecasters for possible
+                                           development and these numbers are
+					   re-used periodically throughout the
+					   season"
+				80 - 89   "Internal training storm numbers
+				           which are to always be ignored"
+					   
+	       <YYYY> = 2003  "4-digit Year"
+	       
+	       Example:  eal102009.dat	"Atlantic basin, Storm #10 of 2009"
+	                 eep902009.dat	"E. pacific basin, Invest #90
+			 ecp882009.dat	"Central Pacific basin, Test system #88
+			                  which is to be ignored."
+					  
+					   
+               FILE FORMAT DOCUMENTATION:  see the URL below:
+	       
+http://www.nrlmry.navy.mil/atcf_web/docs/database/new/edeck.txt
+
+
+-------------------------------------------------------------------------------
+ NATIONAL HURRICANE CENTER POINTS OF CONTACT:
+-------------------------------------------------------------------------------
+  
+  Michael J. Brennan, Senior Hurricane Specialist
+  NOAA/NWS/National Hurricane Center
+  11691 SW 17th Street
+  Miami, FL  33178
+  E-mail: Michael.J.Brennan@noaa.gov
+
+  Note - Contacts will try to respond to your inquiries or correspondance 
+  provided they are not working other operational forecast priorities. During 
+  active storm events, it may not be possible to respond to any inquiries, but
+  we will try to answer all questions as time permits. 
+
