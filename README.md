@@ -13,7 +13,7 @@ The paper can also be found in the folder labelled 'docs'.
 │   LICENSE   
 │
 └───jupyter_notebooks -- ready-to-run jupyter notebooks with inbuilt documentation
-│     └─── sim_data -- data produced during simulation
+│     └─── sim_data -- data produced during simulation (previously produced data is present)
 │  
 │
 └───docs -- literature
