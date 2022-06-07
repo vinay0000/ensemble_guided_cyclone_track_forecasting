@@ -64,7 +64,6 @@ A short and simple permissive license with conditions only requiring preservatio
 ## Contact
 Feel free to contact me if you have any question:
 
-Vinay Ravindra (vinay.ravindra [at] nasa.gov)
-Bay Area Environment Research Institute
-NASA Ames Research Center
-Moffett Field, CA 94035, USA
+Vinay Ravindra (vinay.ravindra [at] nasa.gov) <br>
+Bay Area Environment Research Institute, Moffett Field, CA 94035, USA <br>
+NASA Ames Research Center, Moffett Field, CA 94035, USA
